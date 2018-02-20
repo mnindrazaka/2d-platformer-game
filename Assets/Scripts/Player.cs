@@ -10,7 +10,8 @@ public class Player : MonoBehaviour {
 	public float movementSpeed = 10f; 
 	private bool facingRight = true;
 
-	public bool attack;
+	private bool attack;
+	private bool slide;
 
 	// Use this for initialization
 	void Start () {
@@ -25,10 +26,12 @@ public class Player : MonoBehaviour {
 
 	void FixedUpdate () {
 		float horizontal = Input.GetAxis ("Horizontal");
-
 		HandleMovement (horizontal);
-		Flip (horizontal);
 		HandleAttacks ();
+
+		if (!this.myAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Slide")) {
+			Flip (horizontal);
+		}
 
 		ResetValues ();
 	}
@@ -38,6 +41,12 @@ public class Player : MonoBehaviour {
 			myRigidBody.velocity = new Vector2 (horizontal * movementSpeed, myRigidBody.velocity.y);
 		} else {
 			myRigidBody.velocity = Vector2.zero;
+		}
+
+		if (slide && !myAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Slide")) {
+			myAnimator.SetBool ("slide", true);
+		} else if (!myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide")) {
+			myAnimator.SetBool ("slide", false);
 		}
 
 		myAnimator.SetFloat ("speed", Mathf.Abs(horizontal));
@@ -53,6 +62,10 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.LeftShift)) {
 			attack = true;
 		}
+
+		if (Input.GetKeyDown (KeyCode.LeftControl)) {
+			slide = true;
+		}
 	}
 
 	private void Flip(float horizontal) {
@@ -66,5 +79,6 @@ public class Player : MonoBehaviour {
 
 	private void ResetValues() {
 		attack = false;
+		slide = false;
 	}
 }
