@@ -37,9 +37,9 @@ public class Player : MonoBehaviour {
 	}
 
 	private void HandleMovement(float horizontal) {
-		if (!myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
+		if (!myAnimator.GetBool ("slide") && !myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
 			myRigidBody.velocity = new Vector2 (horizontal * movementSpeed, myRigidBody.velocity.y);
-		} else {
+		} else if (myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
 			myRigidBody.velocity = Vector2.zero;
 		}
 
