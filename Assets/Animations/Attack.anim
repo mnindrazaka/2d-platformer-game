@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Idle
+  m_Name: Attack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,25 +19,25 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: d5d02835541df4638827b0eac0fd71c9, type: 3}
+      value: {fileID: 21300000, guid: 7c2aa5762cee24dcd9abd3f6f6023d29, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: d626e1590f68044a2b155f274f8199db, type: 3}
+      value: {fileID: 21300000, guid: 6930584b2866a449a948a3d8a651d0ee, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 43883ae49afcd497386718735373a5ba, type: 3}
+      value: {fileID: 21300000, guid: 38d5e51c0107440cb84efec01c1c7170, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 4003d5ac1616b41a5912b0a3c26fe5aa, type: 3}
+      value: {fileID: 21300000, guid: 236476512f91c4a9c84f92045ecf3158, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: 5e522b9a3f6ee44eb98a21c2e472881e, type: 3}
+      value: {fileID: 21300000, guid: 5e5b1fbf19acc4b649199601cb5c8a77, type: 3}
     - time: 0.41666666
-      value: {fileID: 21300000, guid: 1477e85f03deb42ef92b2378d4e0b164, type: 3}
+      value: {fileID: 21300000, guid: acaf2c7ac9abe49aaa0d7c7fd4704c88, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: 9727739d0deb641238af0fa25fe4ac8d, type: 3}
+      value: {fileID: 21300000, guid: a02b731c739154c368c75bd283e16f7c, type: 3}
     - time: 0.5833333
-      value: {fileID: 21300000, guid: da8e90f5d873c4405b08caaf1ad07f93, type: 3}
+      value: {fileID: 21300000, guid: b943a2d7258894573a940f2604f2a562, type: 3}
     - time: 0.6666667
-      value: {fileID: 21300000, guid: f5842fecf420443c4994e10982e9de8b, type: 3}
+      value: {fileID: 21300000, guid: 33acb6887eb4241e4a9d39feaba69848, type: 3}
     - time: 0.75
-      value: {fileID: 21300000, guid: 4f3074ef21ffe48a4bb1a7e243a7211b, type: 3}
+      value: {fileID: 21300000, guid: a52a250634b2f48e2adb058c845d62a4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -57,16 +57,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: d5d02835541df4638827b0eac0fd71c9, type: 3}
-    - {fileID: 21300000, guid: d626e1590f68044a2b155f274f8199db, type: 3}
-    - {fileID: 21300000, guid: 43883ae49afcd497386718735373a5ba, type: 3}
-    - {fileID: 21300000, guid: 4003d5ac1616b41a5912b0a3c26fe5aa, type: 3}
-    - {fileID: 21300000, guid: 5e522b9a3f6ee44eb98a21c2e472881e, type: 3}
-    - {fileID: 21300000, guid: 1477e85f03deb42ef92b2378d4e0b164, type: 3}
-    - {fileID: 21300000, guid: 9727739d0deb641238af0fa25fe4ac8d, type: 3}
-    - {fileID: 21300000, guid: da8e90f5d873c4405b08caaf1ad07f93, type: 3}
-    - {fileID: 21300000, guid: f5842fecf420443c4994e10982e9de8b, type: 3}
-    - {fileID: 21300000, guid: 4f3074ef21ffe48a4bb1a7e243a7211b, type: 3}
+    - {fileID: 21300000, guid: 7c2aa5762cee24dcd9abd3f6f6023d29, type: 3}
+    - {fileID: 21300000, guid: 6930584b2866a449a948a3d8a651d0ee, type: 3}
+    - {fileID: 21300000, guid: 38d5e51c0107440cb84efec01c1c7170, type: 3}
+    - {fileID: 21300000, guid: 236476512f91c4a9c84f92045ecf3158, type: 3}
+    - {fileID: 21300000, guid: 5e5b1fbf19acc4b649199601cb5c8a77, type: 3}
+    - {fileID: 21300000, guid: acaf2c7ac9abe49aaa0d7c7fd4704c88, type: 3}
+    - {fileID: 21300000, guid: a02b731c739154c368c75bd283e16f7c, type: 3}
+    - {fileID: 21300000, guid: b943a2d7258894573a940f2604f2a562, type: 3}
+    - {fileID: 21300000, guid: 33acb6887eb4241e4a9d39feaba69848, type: 3}
+    - {fileID: 21300000, guid: a52a250634b2f48e2adb058c845d62a4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -77,7 +77,7 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0

@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
 	public float movementSpeed = 10f; 
 	private bool facingRight = true;
 
+	public bool attack;
+
 	// Use this for initialization
 	void Start () {
 		myRigidBody = this.GetComponent<Rigidbody2D> ();
@@ -17,23 +19,52 @@ public class Player : MonoBehaviour {
 	}
 		
 	// Update is called once per frame
+	void Update() {
+		HandleInput ();
+	}
+
 	void FixedUpdate () {
 		float horizontal = Input.GetAxis ("Horizontal");
+
 		HandleMovement (horizontal);
-		flip (horizontal);
+		Flip (horizontal);
+		HandleAttacks ();
+
+		ResetValues ();
 	}
 
-	void HandleMovement(float horizontal) {
+	private void HandleMovement(float horizontal) {
+		if (!myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
+			myRigidBody.velocity = new Vector2 (horizontal * movementSpeed, myRigidBody.velocity.y);
+		} else {
+			myRigidBody.velocity = Vector2.zero;
+		}
+
 		myAnimator.SetFloat ("speed", Mathf.Abs(horizontal));
-		myRigidBody.velocity = new Vector2 (horizontal * movementSpeed, myRigidBody.velocity.y);
 	}
 
-	void flip(float horizontal) {
+	private void HandleAttacks() {
+		if (attack) {
+			myAnimator.SetTrigger ("attack");
+		}
+	}
+
+	private void HandleInput() {
+		if (Input.GetKeyDown(KeyCode.LeftShift)) {
+			attack = true;
+		}
+	}
+
+	private void Flip(float horizontal) {
 		if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight) {
 			facingRight = !facingRight;
 			Vector3 theScale = this.transform.localScale;
 			theScale.x *= -1;
 			this.transform.localScale = theScale;
 		}
+	}
+
+	private void ResetValues() {
+		attack = false;
 	}
 }
