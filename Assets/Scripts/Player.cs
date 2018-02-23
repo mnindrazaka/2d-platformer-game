@@ -7,11 +7,28 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D myRigidBody;
 	private Animator myAnimator;
 
-	public float movementSpeed = 10f; 
+	[SerializeField]
+	private float movementSpeed = 10f; 
 	private bool facingRight = true;
 
 	private bool attack;
 	private bool slide;
+
+	[SerializeField]
+	private Transform[] groundPoints;
+
+	[SerializeField]
+	private float groundRadius;
+
+	[SerializeField]
+	private LayerMask whatIsGround;
+	private bool isGrounded;
+
+	[SerializeField]
+	private float jumpForce;
+	private bool jump;
+
+	private bool airControl;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +43,8 @@ public class Player : MonoBehaviour {
 
 	void FixedUpdate () {
 		float horizontal = Input.GetAxis ("Horizontal");
+		isGrounded = IsGrounded ();
+
 		HandleMovement (horizontal);
 		HandleAttacks ();
 
@@ -37,10 +56,15 @@ public class Player : MonoBehaviour {
 	}
 
 	private void HandleMovement(float horizontal) {
-		if (!myAnimator.GetBool ("slide") && !myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
+		if (!myAnimator.GetBool ("slide") && !myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack") && (isGrounded || airControl)) {
 			myRigidBody.velocity = new Vector2 (horizontal * movementSpeed, myRigidBody.velocity.y);
 		} else if (myAnimator.GetCurrentAnimatorStateInfo (0).IsTag ("Attack")) {
 			myRigidBody.velocity = Vector2.zero;
+		}
+
+		if(isGrounded && jump) {
+			isGrounded = false;
+			myRigidBody.AddForce (new Vector2 (0, jumpForce));
 		}
 
 		if (slide && !myAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Slide")) {
@@ -66,6 +90,10 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftControl)) {
 			slide = true;
 		}
+
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			jump = true;
+		}
 	}
 
 	private void Flip(float horizontal) {
@@ -80,5 +108,20 @@ public class Player : MonoBehaviour {
 	private void ResetValues() {
 		attack = false;
 		slide = false;
+		jump = false;
+	}
+
+	private bool IsGrounded() {
+		if (myRigidBody.velocity.y <= 0) {
+			foreach (Transform point in groundPoints) {
+				Collider2D[] colliders = Physics2D.OverlapCircleAll (point.position, groundRadius, whatIsGround);
+				foreach (Collider2D collider in colliders) {
+					if (collider.gameObject != gameObject) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }
