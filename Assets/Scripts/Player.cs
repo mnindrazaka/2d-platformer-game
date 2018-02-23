@@ -40,7 +40,9 @@ public class Player : MonoBehaviour {
 		HandleAttacks ();
 
 		if (!this.myAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Slide")) {
-			Flip (horizontal);
+			if (!this.myAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Jump")) {
+				Flip (horizontal);
+			}
 		}
 
 		ResetValues ();
@@ -108,13 +110,16 @@ public class Player : MonoBehaviour {
 	// ground checking
 	void OnTriggerEnter2D(Collider2D col) {
 		isGrounded = true;
+		myAnimator.SetBool ("jump", false);
 	}
 
 	void OnTriggerStay2D(Collider2D col) {
 		isGrounded = true;
+		myAnimator.SetBool ("jump", false);
 	}
 
 	void OnTriggerExit2D(Collider2D col) {
 		isGrounded = false;
+		myAnimator.SetBool ("jump", true);
 	}
 }
