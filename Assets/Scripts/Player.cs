@@ -18,10 +18,7 @@ public class Player : MonoBehaviour {
 	private bool slide;
 
 	// for jump
-	public Transform[] groundPoints;
-	public float groundRadius;
-	public LayerMask whatIsGround;
-	private bool isGrounded;
+	public bool isGrounded;
 	public float jumpForce;
 	private bool jump;
 
@@ -38,7 +35,6 @@ public class Player : MonoBehaviour {
 
 	void FixedUpdate () {
 		float horizontal = Input.GetAxis ("Horizontal");
-		isGrounded = IsGrounded ();
 
 		HandleMovement (horizontal);
 		HandleAttacks ();
@@ -74,7 +70,6 @@ public class Player : MonoBehaviour {
 
 		// jumping
 		if(isGrounded && jump) {
-			isGrounded = false;
 			myRigidBody.AddForce (new Vector2 (0, jumpForce));
 		}
 
@@ -104,23 +99,22 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	private bool IsGrounded() {
-		if (myRigidBody.velocity.y <= 0) {
-			foreach (Transform point in groundPoints) {
-				Collider2D[] colliders = Physics2D.OverlapCircleAll (point.position, groundRadius, whatIsGround);
-				foreach (Collider2D collider in colliders) {
-					if (collider.gameObject != gameObject) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
 	private void ResetValues() {
 		attack = false;
 		slide = false;
 		jump = false;
+	}
+
+	// ground checking
+	void OnTriggerEnter2D(Collider2D col) {
+		isGrounded = true;
+	}
+
+	void OnTriggerStay2D(Collider2D col) {
+		isGrounded = true;
+	}
+
+	void OnTriggerExit2D(Collider2D col) {
+		isGrounded = false;
 	}
 }
