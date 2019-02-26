@@ -1,2 +1,2 @@
 # 2D Platformer Game
-### Created with unity
+Sample 2D platformer game created using unity
